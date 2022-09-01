@@ -1,0 +1,17 @@
+name: replace in file
+description: replaces word in file
+
+inputs:
+  filename:
+    required: true
+    description: name of the file
+  searched-word:
+    required: true
+    description: word to search
+  replace-by:
+    required: true
+    description: replace by
+
+runs:
+  using: node16
+  main: index.js
