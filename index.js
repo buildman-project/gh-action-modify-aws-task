@@ -3,3 +3,5 @@ const addEnvVariables = () => {
   console.log(taskDefinition);
   fs.writeFileSync(filename, JSON.stringify(taskDefinition));
 };
+
+console.log("hehe");
