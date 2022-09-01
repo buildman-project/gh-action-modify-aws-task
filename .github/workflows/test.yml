@@ -9,3 +9,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./
+        id: step-with-output
+        with:
+          base-string: "wtf am i doing here"
+          searched-word: "wtf"
+          replace-by: "do I know what"
+      - run: |
+          echo ${{ steps.step-with-output.outputs.replaced-string }}

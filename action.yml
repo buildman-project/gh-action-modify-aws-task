@@ -2,9 +2,9 @@ name: replace in file
 description: replaces word in file
 
 inputs:
-  filename:
+  base-string:
     required: true
-    description: name of the file
+    description: string to make replacements on
   searched-word:
     required: true
     description: word to search
