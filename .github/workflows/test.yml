@@ -19,8 +19,5 @@ jobs:
             OTHER_PUBLIC_VARIABLE = "whatever"
             ANOTHER_PUBLIC_VARIABLE = 'whatever'
 
-          base-string: "wtf am i doing here"
-          searched-word: "wtf"
-          replace-by: "do I know what"
       - run: |
           echo `./test-task-definition.json`
