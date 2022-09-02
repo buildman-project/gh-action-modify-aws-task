@@ -2803,22 +2803,27 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const core = __nccwpck_require__(186);
+const fs = __nccwpck_require__(147);
 
-const taskDefinitionContent = core.getInput("task-definition-content");
-const envVariables = core.getInput("env-variables");
+const taskDefinitionLocation = core.getInput("task-definition");
+const envVariables = core.getInput("env-variables") || "";
+
+const taskDefinitionContent = fs.readFileSync(taskDefinitionLocation);
 
 const addEnvVariables = (taskDefinitionStr, envString) => {
   const envLines = envString.split(/\r?\n/);
-  const envArray = envLines.map((line) => {
-    let [name, value] = line
-      .split("=")
-      .map((s) => s.trim().replace(/^"|"$/g, "").replace(/^'|'$/g, ""));
+  const envArray = envLines
+    .filter((line) => line.includes("="))
+    .map((line) => {
+      let [name, value] = line
+        .split("=")
+        .map((s) => s.trim().replace(/^"|"$/g, "").replace(/^'|'$/g, ""));
 
-    return {
-      name,
-      value,
-    };
-  });
+      return {
+        name,
+        value,
+      };
+    });
   const taskDefinition = JSON.parse(taskDefinitionStr);
   const taskEnvArr = taskDefinition.containerDefinitions[0].environment;
   taskDefinition.containerDefinitions[0].environment = [
@@ -2829,10 +2834,10 @@ const addEnvVariables = (taskDefinitionStr, envString) => {
   return JSON.stringify(taskDefinition);
 };
 
-core.setOutput(
-  "final-str",
-  addEnvVariables(taskDefinitionContent, envVariables)
-);
+const newTaskDefContent = addEnvVariables(taskDefinitionContent, envVariables);
+fs.writeFileSync(taskDefinitionLocation, newTaskDefContent);
+
+// core.setOutput("final-task-def", neweTaskDefContent);
 
 })();
 
