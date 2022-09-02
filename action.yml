@@ -2,12 +2,12 @@ name: replace in file
 description: replaces word in file
 
 inputs:
-  base-string:
+  env-variables:
     required: true
-    description: string to make replacements on
-  searched-word:
+    description: string of env variables like in a .env file format
+  task-definition-content:
     required: true
-    description: word to search
+    description: json string of task definition
   replace-by:
     required: true
     description: replace by
