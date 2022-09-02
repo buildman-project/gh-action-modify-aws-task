@@ -2828,7 +2828,7 @@ const addEnvVariables = (taskDefinitionStr, envString) => {
   const taskEnvArr = taskDefinition.containerDefinitions[0].environment;
   taskDefinition.containerDefinitions[0].environment = [
     ...taskEnvArr,
-    envArray,
+    ...envArray,
   ];
 
   return JSON.stringify(taskDefinition);
