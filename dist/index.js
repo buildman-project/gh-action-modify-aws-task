@@ -2837,7 +2837,7 @@ const addEnvVariables = (taskDefinitionStr, envString) => {
 const newTaskDefContent = addEnvVariables(taskDefinitionContent, envVariables);
 fs.writeFileSync(taskDefinitionLocation, newTaskDefContent);
 
-// core.setOutput("final-task-def", neweTaskDefContent);
+core.setOutput("final-task-def", newTaskDefContent);
 
 })();
 
