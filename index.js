@@ -26,6 +26,6 @@ const addEnvVariables = (taskDefinitionStr, envString) => {
 };
 
 core.setOutput(
-  "final-str",
+  "final-task-def",
   addEnvVariables(taskDefinitionContent, envVariables)
 );

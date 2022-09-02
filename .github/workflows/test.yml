@@ -34,4 +34,4 @@ jobs:
           searched-word: "wtf"
           replace-by: "do I know what"
       - run: |
-          echo ${{ steps.step-with-output.outputs.final-str }}
+          echo ${{ steps.step-with-output.outputs.final-task-def }}
