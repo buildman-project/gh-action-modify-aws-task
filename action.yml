@@ -5,7 +5,7 @@ inputs:
   env-variables:
     required: true
     description: string of env variables like in a .env file format
-  task-definition-content:
+  task-definition:
     required: true
     description: json string of task definition
   replace-by:

@@ -1,7 +1,10 @@
 const core = require("@actions/core");
+const fs = require("fs");
 
-const taskDefinitionContent = core.getInput("task-definition-content");
+const taskDefinitionLocation = core.getInput("task-definition");
 const envVariables = core.getInput("env-variables") || "";
+
+const taskDefinitionContent = fs.readFileSync(taskDefinitionLocation);
 
 const addEnvVariables = (taskDefinitionStr, envString) => {
   const envLines = envString.split(/\r?\n/);
@@ -27,7 +30,7 @@ const addEnvVariables = (taskDefinitionStr, envString) => {
   return JSON.stringify(taskDefinition);
 };
 
-core.setOutput(
-  "final-task-def",
-  addEnvVariables(taskDefinitionContent, envVariables)
-);
+const newTaskDefContent = addEnvVariables(taskDefinitionContent, envVariables);
+fs.writeFileSync(taskDefinitionLocation, newTaskDefContent);
+
+// core.setOutput("final-task-def", neweTaskDefContent);
