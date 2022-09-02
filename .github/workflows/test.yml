@@ -19,7 +19,6 @@ jobs:
                 {
                   "environment": [],
                   "stopTimeout": null,
-                  "image": "048948191661.dkr.ecr.us-east-1.amazonaws.com/buildman_fe:9dc868b08d1e670a9dd7123a9de0a53fdd57d8b3"
                 }
               ],
               "pidMode": null,
@@ -30,7 +29,6 @@ jobs:
             NEXT_PUBLIC_AUTH_BASE_URL = http://localhost:3000/api
             OTHER_PUBLIC_VARIABLE = "whatever"
             ANOTHER_PUBLIC_VARIABLE = 'whatever'
-
 
           base-string: "wtf am i doing here"
           searched-word: "wtf"
