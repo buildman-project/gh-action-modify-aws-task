@@ -11,7 +11,7 @@ jobs:
       - uses: ./
         id: step-with-output
         with:
-          task-definition-content: |
+          task-definition: |
             ./test-task-definition.json
 
           env-variables: |
