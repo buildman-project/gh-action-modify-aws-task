@@ -1,0 +1,13 @@
+{
+  "ipcMode": null,
+  "executionRoleArn": null,
+  "containerDefinitions": [
+    {
+      "environment": [],
+      "stopTimeout": null,
+      "image": "048948191661.dkr.ecr.us-east-1.amazonaws.com/buildman_fe:9dc868b08d1e670a9dd7123a9de0a53fdd57d8b3"
+    }
+  ],
+  "pidMode": null,
+  "volumes": []
+}

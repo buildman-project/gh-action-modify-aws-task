@@ -11,8 +11,29 @@ jobs:
       - uses: ./
         id: step-with-output
         with:
+          task-definition-content: |
+            {
+              "ipcMode": null,
+              "executionRoleArn": null,
+              "containerDefinitions": [
+                {
+                  "environment": [],
+                  "stopTimeout": null,
+                  "image": "048948191661.dkr.ecr.us-east-1.amazonaws.com/buildman_fe:9dc868b08d1e670a9dd7123a9de0a53fdd57d8b3"
+                }
+              ],
+              "pidMode": null,
+              "volumes": []
+            }
+
+          env-variables: |
+            NEXT_PUBLIC_AUTH_BASE_URL = http://localhost:3000/api
+            OTHER_PUBLIC_VARIABLE = "whatever"
+            ANOTHER_PUBLIC_VARIABLE = 'whatever'
+
+
           base-string: "wtf am i doing here"
           searched-word: "wtf"
           replace-by: "do I know what"
       - run: |
-          echo ${{ steps.step-with-output.outputs.replaced-string }}
+          echo ${{ steps.step-with-output.outputs.final-str }}

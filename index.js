@@ -1,21 +1,31 @@
 const core = require("@actions/core");
-const gh = require("@actions/github");
 
-const baseString = core.getInput("base-string");
-const searchedString = core.getInput("searched-word");
-const replaceByString = core.getInput("replace-by");
+const taskDefinitionContent = core.getInput("task-definition-content");
+const envVariables = core.getInput("env-variables");
 
-const replaceVariables = (base, search, replace) => {
-  return base.split(search).join(replace);
-};
+const addEnvVariables = (taskDefinitionStr, envString) => {
+  const envLines = envString.split(/\r?\n/);
+  const envArray = envLines.map((line) => {
+    let [name, value] = line
+      .split("=")
+      .map((s) => s.trim().replace(/^"|"$/g, "").replace(/^'|'$/g, ""));
 
-const addEnvVariables = () => {
-  var taskDefinition = JSON.parse(fs.readFileSync(filename).toString());
-  console.log(taskDefinition);
-  fs.writeFileSync(filename, JSON.stringify(taskDefinition));
+    return {
+      name,
+      value,
+    };
+  });
+  const taskDefinition = JSON.parse(taskDefinitionStr);
+  const taskEnvArr = taskDefinition.containerDefinitions[0].environment;
+  taskDefinition.containerDefinitions[0].environment = [
+    ...taskEnvArr,
+    envArray,
+  ];
+
+  return JSON.stringify(taskDefinition);
 };
 
 core.setOutput(
-  "replaced-string",
-  replaceVariables(baseString, searchedString, replaceByString)
+  "final-str",
+  addEnvVariables(taskDefinitionContent, envVariables)
 );
